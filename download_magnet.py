@@ -23,8 +23,9 @@ class DownloadMagnet(object):
             for url in [u for u in urls if u.startswith('magnet:')]:
                 content = "d10:magnet-uri%s:%se" % (len(url),url)
                 filename = '%s-%s.torrent' % (entry['title'].replace(' ','_'),self.regex.findall(url)[0])
+                filename = os.path.join(config,filename)
                 filename = os.path.expanduser(filename)
-                with open(os.path.join(config,filename),'w+') as f:
+                with open(filename,'w+') as f:
                     f.write(content)
 
 try:
